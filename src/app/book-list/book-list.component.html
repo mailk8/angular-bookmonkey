@@ -1,15 +1,5 @@
-<div class="ui middle aligned selection divided list"> <!-- Dpunkt S. 129 -->
-  <a *ngFor="let book of books" class="item">
-    <img class="ui tiny image" *ngIf="book.thumbnails && book.thumbnails[0] && book.thumbnails[0].url" [src]="book.thumbnails[0].url" >
-    <div class="content">
-      <div class="header">{{book.title}}</div>
-      <div *ngIf="book.subtitle" class="description">{{book.subtitle}}</div>
-      <div class="metadata">
-        <span *ngFor="let author of book.authors; last as la">
-          {{author}} <span *ngIf="!la">, </span>  <!-- Fügt ein Komma an bis das letzte Element erreicht ist, dann nicht mehr. Nice.-->
-        </span>
-        <br>ISBN {{book.isbn}}
-      </div>
-    </div>
-  </a>
+<div class="ui middle aligned selection divided list">
+  <!-- Gesamte Liste wurde ausgelagert in ein Book List Item. Dpunkt S. 144-->
+  <!-- PropertyBinding, Wert von b wird über book in  die Komponete BookListItem überführt -->
+  <bm-book-list-item class="item" *ngFor="let b of books" [book]="b" (click)="showDetails(b)"></bm-book-list-item>
 </div>
