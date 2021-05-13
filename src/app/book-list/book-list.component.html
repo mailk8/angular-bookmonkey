@@ -1,5 +1,16 @@
 <div class="ui middle aligned selection divided list">
   <!-- Gesamte Liste wurde ausgelagert in ein Book List Item. Dpunkt S. 144-->
   <!-- PropertyBinding, Wert von b wird über book in  die Komponete BookListItem überführt -->
-  <bm-book-list-item class="item" *ngFor="let b of books" [book]="b" (click)="showDetails(b)"></bm-book-list-item>
+  <bm-book-list-item class="item" *ngFor="let b of books"
+                      [book]="b"
+                      [routerLink]="b.isbn"></bm-book-list-item> <!-- relativ, Anfügen der isbn als URL Parameter -->
+  <!--                [routerLink]="['/books', b.isbn]"></bm-book-list-item>--> <!-- absolut -->
+
+  <!--  Ladesymbol-->
+  <div *ngIf="!books" class="ui active dimmer">
+    <div class="ui large text loader">Daten werden geladen...</div>
+  </div>
+
+  <!--  REST Service lieferte keine Bücher-->
+  <p *ngIf="books && !books.length">Es wurden noch keine Bücher geliefert.</p>
 </div>

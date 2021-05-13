@@ -1,47 +1,35 @@
+// Erzeugt Bücher und fungiert als DAO
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import {Book} from './book';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookStoreService {
+  // Stellt Bücher als json über eine REST-Api bereit
+  private api = 'https://api4.angular-buch.com';
+  // books: Book[];
 
-  books: Book[];
-
-  constructor() {
-    this.books = [
-      {
-        isbn: '9783864907791',
-        title: 'Angular',
-        authors: ['Ferdinand Malcher', 'Johannes Hoppe', 'Danny Koppenhagen'],
-        published: new Date(2020, 8, 1),
-        subtitle: 'Grundlagen, fortgeschrittene Themen und Best Practices',
-        rating: 5,
-        thumbnails: [{
-          url: 'https://ng-buch.de/angular-cover.jpg',
-          title: 'Buchcover'
-        }],
-        description: 'Lernen Sie Angular mit diesem Praxisbuch!'
-      },
-      {
-        isbn: '9783864905520',
-        title: 'React',
-        authors: ['Oliver Zeigermann', 'Nils Hartmann'],
-        published: new Date(2019, 11, 12),
-        subtitle: 'Grundlagen, fortgeschrittene Techniken und Praxistipps',
-        rating: 3,
-        thumbnails: [{
-          url: 'https://ng-buch.de/react-cover.jpg',
-          title: 'Buchcover'
-        }],
-        description: 'Das bewährte und umfassende Praxisbuch zu React.'
-      }
-    ];
+  constructor(private http: HttpClient) {
   }
 
-  getAll(): Book[] {
-    return this.books;
+  //////////////////////// CRUD Methoden ///////////////////////////
+
+  // READ
+  getAll(): Observable<Book[]> { // Request wird nur ausgeführt, wenn das Observable subscribed wird. Das erfolgt in den Komponenten
+    return this.http.get<any[]>(`${this.api}/books`);
+  }
+
+  getSingle(isbn: string): Observable<Book> {
+    // Die API bietet die Ressource /book/<isbn>
+    return this.http.get<any>(`${this.api}/book/${isbn}`);
+  }
+
+  // DELETE
+  remove(isbn: string): Observable<any> {
+    // Service liefert bei Delete einen leeren Responsebody, es soll nicht versucht werden, diesen als json zu parsen
+    return this.http.delete(`${this.api}/book/${isbn}`, {responseType: 'text'});
   }
 }
-
-// Dpunkt S. 145

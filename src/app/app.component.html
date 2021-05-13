@@ -1,2 +1,11 @@
-<bm-book-list *ngIf="viewState === 'list'" (showDetailsEvent)="showDetails($event)"></bm-book-list>
-<bm-book-details *ngIf="viewState === 'details'" (showListEvent)="showList()" [book]="book"></bm-book-details>
+<!--Hauptkomponentenview-->
+<!--Style für Body überschrieben in semantic-ui.css mit margin: 50px; padding: 50px;-->
+
+<!--<bm-book-list *ngIf="viewState === 'list'" (showDetailsEvent)="showDetails($event)"></bm-book-list>-->
+<!--<bm-book-details *ngIf="viewState === 'details'" (showListEvent)="showList()" [book]="book"></bm-book-details>-->
+<!--Verdrahtung der Komponenten ersetzt durch Router-Outlet, Dpunkt S. 168-->
+<div class="ui menu">
+  <a routerLink="home" routerLinkActive="active" class="item">Home</a>
+  <a routerLink="books" routerLinkActive="active" class="item">Bücher</a>
+</div>
+<router-outlet></router-outlet>

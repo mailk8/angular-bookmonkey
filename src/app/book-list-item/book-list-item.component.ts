@@ -1,3 +1,4 @@
+// Buchlisteneintrag
 import {Component, Input, OnInit} from '@angular/core';
 import {Book} from '../shared/book';
 

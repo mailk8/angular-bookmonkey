@@ -1,3 +1,4 @@
+// Zentrale
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -7,6 +8,7 @@ import { BookListComponent } from './book-list/book-list.component';
 import { HomeComponent } from './home/home.component';
 import { BookListItemComponent } from './book-list-item/book-list-item.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { BookDetailsComponent } from './book-details/book-details.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,7 @@
 <!-- Detailansicht Buch -->
-<div *ngIf="book">
+
+<!--Falls nocht keine Daten vorliegen, Lade Frogger anzeigen-->
+<div *ngIf="book; else loading">
   <h1>{{book.title}}</h1>
   <h3 *ngIf="book.subtitle">{{book.subtitle}}</h3>
   <div class="ui divider"></div>    <!-- HR   -->
@@ -28,5 +30,19 @@
   <div class="ui small images">
     <img *ngFor="let thumbnail of book.thumbnails" [src]="thumbnail.url">
   </div>
-  <button class="ui red button" (click)="showBookList()">Zurück zur Buchliste</button>
+<!--  <button class="ui red button" (click)="showBookList()">Zurück zur Buchliste</button>-->
+
+<button class="ui tiny red labeled icon button" (click)="removeBook()">
+  <i class="remove icon"></i>Buch löschen
+</button>
 </div>
+
+
+<!--Muss außerhalb des referenzierenden Divs stehen-->
+<ng-template #loading>
+  <div class="ui active centered inline loader"></div>
+</ng-template>
+
+
+<!--CSS angepasst mit p { white-space: pre-wrap; }-->
+<!--Das bewirkt schönere Zeilenumbrüche-->
