@@ -8,7 +8,9 @@ import { BookListComponent } from './book-list/book-list.component';
 import { HomeComponent } from './home/home.component';
 import { BookListItemComponent } from './book-list-item/book-list-item.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { SearchComponent } from './search/search.component';
+import {TokenInterceptor} from './shared/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -16,14 +18,19 @@ import {HttpClientModule} from '@angular/common/http';
     BookListComponent,
     BookListItemComponent,
     BookDetailsComponent,
-    HomeComponent
+    HomeComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

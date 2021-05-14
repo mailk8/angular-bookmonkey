@@ -13,7 +13,7 @@ export class BookListComponent implements OnInit {
   // books: Book[] = new Book[](); // ist beim Start noch 'undefined', Bücher treffen erst später von der REST-Apianfrage ein
   // books: Array<Book> = new Array();
   // books: Book[] = new Array();
-  books: Book[] = []; // initialisierung mit leerem Array kann Fehler vermeiden
+  books: Book[];
 
   // @Output() showDetailsEvent = new EventEmitter<Book>();
 
