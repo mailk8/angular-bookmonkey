@@ -1,0 +1,52 @@
+<!--Buch-Formular für Eingabe und Editing, Nutzung von TemplateDrivenForms-->
+<!--  Formular wird mit dem Formularmodell in der Komponente verknüpft über die Direktive [formGroup]-->
+<form class="ui form" [formGroup]="bookForm" (ngSubmit)="submitForm()">
+  <label>Buchtitel</label>
+
+  <!--  Statt Direktive wird hier detailliert erklärt, dass in der FormGroup nach einem FormControl mit dem Namen (Key) title gesucht werden soll-->
+  <input formCotrolName="title">
+  <!--  Die Direktive gibt an, welchen Feldtyp in der Message-Komponente angesprochen wird: Wie ein Referenztyp in Java-->
+  <!--  Danach folgt der Ausdruck: Woher kommen die Daten (hier die ins Control gehören)-->
+  <!--  Der Control Name wird noch einmal separat in die Message-Komponente übergeben-->
+  <bm-form-messages [control]="bookForm.get('title')" controlName="title"> </bm-form-messages>
+
+  <label>Untertitel</label>
+  <!--  FormArray wird mit dem Template verknüpft: bookForm ist bereits übergeordnet referenziert. Jetzt wird noch der Key "subtitle" genannt. -->
+  <input formControlName="subtitle">
+
+  <label>ISBN</label>
+  <input formControlName="isbn">
+  <bm-form-messages [control]="bookForm.get('isbn')" controlName="isbn"></bm-form-messages>
+
+  <label>Erscheinungsdatum</label>
+  <input type="date" useValueAsDate formControlName="published" >
+  <bm-form-messages [control]="bookForm.get('published')" controlName="published"> </bm-form-messages>
+
+  <label>Autoren</label>
+  <button type="button" (click)="addAuthorControl()" class="ui mini button" style="margin-left: 1em !important;">+ weitere</button>
+  <div  formArrayName="authors">
+    <div class="sixteen wide field" *ngFor="let c of authors.controls; index as i">
+        <input placeholder="Author" [formControlName]="i">
+    </div>
+  </div>
+  <bm-form-messages [control]="bookForm.get('authors')" controlName="authors"> </bm-form-messages>
+
+  <label>Beschreibung</label>
+  <textarea formControlName="description"></textarea>
+
+  <label>Bild</label>
+  <button type="button" (click)="addThumbnailControl()" class="ui mini button" style="margin-left: 1em !important;">+ weitere</button>
+  <div formArrayName="thumbnails">
+    <div class="fields" *ngFor="let c of thumbnails.controls; index as i" [formGroupName]="i">
+      <div class="nine wide field">
+        <input placeholder="URL" formControlName="url">
+      </div>
+      <div class="nine wide field">
+        <input placeholder="Titel" formControlName="title">
+      </div>
+    </div>
+  </div>
+
+  <button class="ui green button" type="submit" [disabled]="bookForm.invalid">Speichern</button>
+
+</form>

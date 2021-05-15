@@ -88,19 +88,19 @@
     ],
     "typedef-whitespace": {
       "options": [
-        {
+        {// Vor Typzuweisungs Doppelpunkt
           "call-signature": "nospace",
           "index-signature": "nospace",
           "parameter": "nospace",
           "property-declaration": "nospace",
           "variable-declaration": "nospace"
         },
-        {
-          "call-signature": "onespace",
-          "index-signature": "onespace",
-          "parameter": "onespace",
-          "property-declaration": "onespace",
-          "variable-declaration": "onespace"
+        { // Nach Typzuweisungs Doppelpunkt
+          "call-signature": "space",
+          "index-signature": "space",
+          "parameter": "space",
+          "property-declaration": "space",
+          "variable-declaration": "space"
         }
       ]
     },
@@ -111,6 +111,9 @@
         "allow-pascal-case"
       ]
     },
+    "no-trailing-whitespace": false, // Anpassung wg. nerviger Whitespace Warnung
+    "ignoreComments": true, // Anpassung wg. nerviger Whitespace Warnung
+    "skipBlankLines": true, // Anpassung wg. nerviger Whitespace Warnung
     "whitespace": {
       "options": [
         "check-branch",

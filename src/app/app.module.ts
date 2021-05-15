@@ -11,6 +11,12 @@ import { BookDetailsComponent } from './book-details/book-details.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { SearchComponent } from './search/search.component';
 import {TokenInterceptor} from './shared/token.interceptor';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {DateValueAccessorModule} from 'angular-date-value-accessor';
+import { BookFormComponent } from './book-form/book-form.component';
+import { CreateBookComponent } from './create-book/create-book.component';
+import { EditBookComponent } from './edit-book/edit-book.component';
+import { FormMessagesComponent } from './form-messages/form-messages.component';
 
 @NgModule({
   declarations: [
@@ -19,12 +25,19 @@ import {TokenInterceptor} from './shared/token.interceptor';
     BookListItemComponent,
     BookDetailsComponent,
     HomeComponent,
-    SearchComponent
+    SearchComponent,
+    BookFormComponent,
+    CreateBookComponent,
+    EditBookComponent,
+    FormMessagesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule, // ersetzt durch ReactiveFormsModule
+    DateValueAccessorModule,
+    ReactiveFormsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

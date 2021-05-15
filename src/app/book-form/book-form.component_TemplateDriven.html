@@ -1,0 +1,47 @@
+<!--&lt;!&ndash;Buch-Formular für Eingabe und Editing, Nutzung von TemplateDrivenForms&ndash;&gt;-->
+<!--  &lt;!&ndash;Elementreferenz bookForm wird in der Komponente durch @ViewChild importiert&ndash;&gt;-->
+<!--<form class="ui form" #bookFormTemplateDriven="ngForm" (ngSubmit)="submitForm()">-->
+<!--  <label>Buchtitel</label>-->
+<!--  &lt;!&ndash;  Das Eingabeformular hat eine Referenz auf eine Variable in der Komponente (hier book.title) in die die Daten abgelegt werden sollen. &ndash;&gt;-->
+<!--  &lt;!&ndash;  Diese Ref. wird auf dem UI in der EL weitergegeben an ein Tag der Messageklasse (hier über die Elementreferenz #titleInput). &ndash;&gt;-->
+<!--  &lt;!&ndash;  In der Messageklasse wird die Ref. in eine Variable vom Typ AbstractControl gesteckt. In der Messageklasse ermöglicht es das &ndash;&gt;-->
+<!--  &lt;!&ndash;  AbstractControl, das Validierungsergebnis auszulesen und auf dessen Basis die Usermessage zusammenzustellen. Außerdem wird &ndash;&gt;-->
+<!--  &lt;!&ndash;  zusätzlich auf separatem Weg der Name des Eingabefeldes über controlName in die Messageklasse gegeben. Die Usermessage(s) &ndash;&gt;-->
+<!--  &lt;!&ndash;  zum Feld werden zunächst in das Template form-messages geschleust und dort interiert und gerendert. Dann kommen sie zurück &ndash;&gt;-->
+<!--  &lt;!&ndash;  ins Eingabeformular und werden über <bm-form-messages> an passender Stelle dargestellt.&ndash;&gt;-->
+<!--  <input name="title" [(ngModel)]="book.title" #titleInput="ngModel" required>-->
+<!--  <bm-form-messages [control]="titleInput" controlName="title"> </bm-form-messages>-->
+
+
+<!--  <label>Untertitel</label>-->
+<!--  <input name="subtitle" [(ngModel)]="book.subtitle">-->
+
+<!--  <label>ISBN</label>-->
+<!--  <input name="isbn" [(ngModel)]="book.isbn" #isbnInput="ngModel" required minlength="10" maxlength="13">-->
+<!--  <bm-form-messages [control]="isbnInput" controlName="isbn"></bm-form-messages>-->
+
+<!--  <label>Erscheinungsdatum</label>-->
+<!--  <input type="date" name="published" [(ngModel)]="book.published" #dateInput="ngModel" useValueAsDate required>-->
+<!--  <bm-form-messages [control]="dateInput" controlName="published"> </bm-form-messages>-->
+
+<!--  <label>Autor</label>-->
+<!--  <input name="authors" [(ngModel)]="book.authors[0]" #authorInput="ngModel" required>-->
+<!--  <bm-form-messages [control]="authorInput" controlName="author"> </bm-form-messages>-->
+
+<!--  <label>Beschreibung</label>-->
+<!--  <textarea name="description" [(ngModel)]="book.description"></textarea>-->
+
+<!--  <label>Bild</label>-->
+<!--  <div class="two fields">-->
+<!--    <div class="field">-->
+<!--      <input name="url" [(ngModel)]="book.thumbnails[0].url" placeholder="URL">-->
+<!--    </div>-->
+<!--    <div class="field">-->
+<!--      <input name="title" [(ngModel)]="book.thumbnails[0].title" placeholder="Titel">-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <button class="ui button" type="submit" [disabled]="bookForm.invalid">-->
+<!--    Speichern-->
+<!--  </button>-->
+<!--</form>-->

@@ -34,6 +34,12 @@ export class BookStoreService {
   }
 
   //////////////////////// CRUD Methoden ///////////////////////////
+  // CREATE
+  create(book: Book): Observable<any> {
+    const obs = this.http.post(`${this.api}/book`, book, {responseType: 'text'}) // Typ Text bereitet auf leere Response vor
+      .pipe(catchError(this.errorHandler));
+    return obs;
+  }
 
   // READ
   getAll(): Observable<Book[]> { // Request wird nur ausgeführt, wenn das Observable subscribed wird. Das erfolgt in den Komponenten
