@@ -4,7 +4,7 @@
   <label>Buchtitel</label>
 
   <!--  Statt Direktive wird hier detailliert erklärt, dass in der FormGroup nach einem FormControl mit dem Namen (Key) title gesucht werden soll-->
-  <input formCotrolName="title">
+  <input formControlName="title">
   <!--  Die Direktive gibt an, welchen Feldtyp in der Message-Komponente angesprochen wird: Wie ein Referenztyp in Java-->
   <!--  Danach folgt der Ausdruck: Woher kommen die Daten (hier die ins Control gehören)-->
   <!--  Der Control Name wird noch einmal separat in die Message-Komponente übergeben-->
@@ -15,7 +15,8 @@
   <input formControlName="subtitle">
 
   <label>ISBN</label>
-  <input formControlName="isbn">
+<!--  <input formControlName="isbn" >-->
+  <input formControlName="isbn" class="isbnInput">
   <bm-form-messages [control]="bookForm.get('isbn')" controlName="isbn"></bm-form-messages>
 
   <label>Erscheinungsdatum</label>

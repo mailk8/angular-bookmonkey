@@ -18,7 +18,7 @@ export class FormMessagesComponent implements OnInit {
     },
     isbn: {
       required: 'Es muss eine ISBN angegeben werden.',
-      minlength: 'Die ISBN muss mindestens 10 Zeichen haben.', // der Fehler mit dem zugehörigen Fehlertext
+      minlength: 'Die ISBN muss mindestens 10 Zeichen haben.', // Validierungsfehler mit dem zugehörigen Fehlertext
       maxlength: 'Die ISBN darf höchstens 13 Zeichen haben.'
     },
     published: {
@@ -40,7 +40,7 @@ export class FormMessagesComponent implements OnInit {
     const messages = this.allMessages[this.controlName]; // holt Message(s) zu Fehlerfeld.
 
     console.log('-------------------------------------------------------------------------------------');
-    console.log('controlName = Feldbezeichnung: ' + this.controlName);
+    console.log('controlName = Feldbezeichnung: ' + this.controlName + ' Wert: ' + this.control.value);
     console.log(`messages = mögliche Errormessages zum Feld: ` + JSON.stringify(messages));
     console.log(`control errors = Validierung bemängelt: ` + JSON.stringify(this.control.errors));
     console.log(`control value = Eingabewert war: ` + JSON.stringify(this.control.value));

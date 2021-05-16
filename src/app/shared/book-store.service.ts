@@ -64,6 +64,13 @@ export class BookStoreService {
     return transfomedBook;
   }
 
+  // UPDATE
+  update(book: Book): Observable<any> {
+    const obs = this.http.put(`${this.api}/book/${book.isbn}`, book, {responseType: 'text'})
+      .pipe(catchError(this.errorHandler));
+    return obs;
+  }
+
   // DELETE
   remove(isbn: string): Observable<any> {
     // Service liefert bei Delete einen leeren Responsebody, es soll nicht versucht werden, diesen als json zu parsen

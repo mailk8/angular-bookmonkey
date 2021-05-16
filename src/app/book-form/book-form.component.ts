@@ -1,6 +1,6 @@
 // Formularcontroller Bücher editieren und erstellen
 // Umgestellt von TemplateDrivenForms auf ReactiveForms
-import {Component, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, ViewChild, Input, OnChanges} from '@angular/core';
 import {Book} from '../shared/book';
 import {FormArray, FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {Thumbnail} from '../shared/thumbnail';
@@ -11,20 +11,29 @@ import {BookFactory} from '../shared/book-factory';
   templateUrl: './book-form.component.html',
   styleUrls: ['./book-form.component.css']
 })
-export class BookFormComponent implements OnInit {
+export class BookFormComponent implements OnInit, OnChanges {
 
-  // gehört zu TemplateDriven Ansatz, wurde ersetzt durch Reactive Forms ( behalten zu Anschauungszwecken ) --->
-  book = BookFactory.empty();
+  // ---> gehört zu TemplateDriven Ansatz, wurde ersetzt durch Reactive Forms ( behalten zu Anschauungszwecken )
+  // book = BookFactory.empty();
   @ViewChild('bookForm', { static: true }) bookFormTemplateDriven: NgForm; // Referenz auf UI Element #bookForm, Nutzung in TemplateDrivenForms
   // <----
 
   bookForm: FormGroup;
 
+  @Input() book: Book;
+  @Input() editing = false; // Wird das Formular gerade zum Editieren oder zum Neuanlegen geneutz?
   @Output() submitBook = new EventEmitter<Book>();
 
   constructor(private fb: FormBuilder) {}
 
+  ngOnChanges(): void {
+    // Methode läuft im Lifecycle vor OnInit
+    this.initForm();
+    this.setFormValues(this.book);
+  }
+
   ngOnInit(): void {
+    // Methode läuft im Lifecycle nach OnChange
     this.initForm();
   }
 
@@ -34,12 +43,21 @@ export class BookFormComponent implements OnInit {
     this.bookForm = this.fb.group({
       title: ['', Validators.required],
       subtitle: [''],
-      isbn: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(13)]],
+      // Feld isbn darf nicht bearbeitet werden, wenn das Buch editiert wird. Dann taucht es aber auch nicht in bookform.value auf
+      isbn: [{ value: '', disabled: this.editing }, [Validators.required, Validators.minLength(10), Validators.maxLength(13)]],
       description: [''],
       authors: this.buildAuthorsArray(['']), // Es gibt noch keinen Author, später kann der User weitere Author-Felder anlegen
       thumbnails: this.buildThumbnailsArray([{title: '', url: ''}]),
       published: []
     });
+  }
+
+  setFormValues(book: Book): void {
+    // Nach dem Initialisieren des Formulars werden die Felder zum Editiren mit Buchdaten gefüllt
+    this.bookForm.patchValue(book);
+    // Hier werden die Arrays neu gebaut, weil nach dem initialisieren nichth die passende Anzahl an Controls in den Arrays vorhanden sind
+    this.bookForm.setControl('authors', this.buildAuthorsArray(book.authors));
+    this.bookForm.setControl('thumbnails', this.buildThumbnailsArray(book.thumbnails));
   }
 
   // Methoden für dynamische Formularfelder Thumbnails und Authors. Man kann durch einen + Button
@@ -75,9 +93,10 @@ export class BookFormComponent implements OnInit {
 
   submitForm(): void { // Im Formular ist mit dem Event (ngSubmit) eingestellt, dass diese Methode bei Buttonklick gerufen wird
     const formValue = this.bookForm.value;
+    const isbn = this.editing ? this.book.isbn : formValue.isbn;
     const authors = formValue.authors.filter(keineLeerenFelder => keineLeerenFelder);
     const thumbnails = formValue.thumbnails.filter(keineLeerenFelder => keineLeerenFelder.url);
-    const newBook: Book = {...formValue, authors, thumbnails};
+    const newBook: Book = {...formValue, authors, thumbnails, isbn}; // Isbn wird separat gesetzt, da sie beim Editieren nicht aufs UI kommt (disabled)
     this.submitBook.emit(this.bookForm.getRawValue()); // Veröffentlichen eines Events, wird aufgefangen im Template der Elternkomponente Create Book und dort weitergeleitet
     // this.submitBook.emit(this.book); // TemplateDriven Ansatz
     // this.book = BookFactory.empty(); // TemplateDriven Ansatz
