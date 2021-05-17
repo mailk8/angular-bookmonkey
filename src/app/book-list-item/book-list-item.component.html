@@ -7,7 +7,7 @@
     <span *ngFor="let author of book.authors; last as la">
       {{author}} <span *ngIf="!la">, </span>  <!-- Fügt ein Komma an bis das letzte Element erreicht ist, dann nicht mehr. Nice.-->
     </span>
-    <br>ISBN {{book.isbn}}
+    <br>ISBN {{book.isbn | isbn}}
   </div>
 </div>
 <!--CSS angepasst mit p { white-space: pre-wrap; }-->
