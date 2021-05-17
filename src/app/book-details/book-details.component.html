@@ -28,6 +28,7 @@
   <h4>Beschreibung</h4>
   <p>{{book.description}}</p>
   <div class="ui small images">
+<!--    Defaultbild einfügen ?-->
     <img *ngFor="let thumbnail of book.thumbnails" [src]="thumbnail.url">
   </div>
 <!--  <button class="ui red button" (click)="showBookList()">Zurück zur Buchliste</button>-->

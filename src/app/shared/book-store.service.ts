@@ -33,6 +33,15 @@ export class BookStoreService {
     return bookArr;
   }
 
+  // VALIDATION
+  check(isbn: string): Observable<boolean> {
+    return this.http.get(
+      `${this.api}/book/${isbn}/check`
+    ).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
   //////////////////////// CRUD Methoden ///////////////////////////
   // CREATE
   create(book: Book): Observable<any> {

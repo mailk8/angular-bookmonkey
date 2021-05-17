@@ -2,9 +2,11 @@
 // Umgestellt von TemplateDrivenForms auf ReactiveForms
 import {Component, OnInit, Output, EventEmitter, ViewChild, Input, OnChanges} from '@angular/core';
 import {Book} from '../shared/book';
-import {FormArray, FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {Thumbnail} from '../shared/thumbnail';
 import {BookFactory} from '../shared/book-factory';
+import {BookExistsValidatorService} from '../shared/book-exists-validator.service';
+import {BookValidators} from '../shared/book-validators';
 
 @Component({
   selector: 'bm-book-form',
@@ -24,7 +26,7 @@ export class BookFormComponent implements OnInit, OnChanges {
   @Input() editing = false; // Wird das Formular gerade zum Editieren oder zum Neuanlegen geneutz?
   @Output() submitBook = new EventEmitter<Book>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private bookExistsValidator: BookExistsValidatorService, private authorValidator: BookValidators) {}
 
   ngOnChanges(): void {
     // Methode läuft im Lifecycle vor OnInit
@@ -35,8 +37,10 @@ export class BookFormComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     // Methode läuft im Lifecycle nach OnChange
     this.initForm();
+    const fc: FormControl = new FormControl();
   }
 
+  // FORMGROUP FÜR BOOKFORMULAR
   initForm(): void {
     if (this.bookForm) { return; } // Formular darf nicht versehentlich überschrieben werden
     // initialer Aufbau des Formularmodells, die Felder sollen immer zumindest mit empty String belegt werden
@@ -44,13 +48,17 @@ export class BookFormComponent implements OnInit, OnChanges {
       title: ['', Validators.required],
       subtitle: [''],
       // Feld isbn darf nicht bearbeitet werden, wenn das Buch editiert wird. Dann taucht es aber auch nicht in bookform.value auf
-      isbn: [{ value: '', disabled: this.editing }, [Validators.required, Validators.minLength(10), Validators.maxLength(13)]],
+      // isbn: [{ value: '', disabled: this.editing }, [Validators.required, Validators.minLength(10), Validators.maxLength(13)]],
+      isbn: [{ value: '', disabled: this.editing }, [Validators.required, BookValidators.isbnFormat], this.editing ? null : [this.bookExistsValidator]],
       description: [''],
-      authors: this.buildAuthorsArray(['']), // Es gibt noch keinen Author, später kann der User weitere Author-Felder anlegen
+      authors: this.buildAuthorsArray(['']), // Hier kann man zwar einen Validator anhängen, aber der bekommt nicht das Array reingereicht, sondern einzelne FormControls
       thumbnails: this.buildThumbnailsArray([{title: '', url: ''}]),
       published: []
     });
   }
+
+
+
 
   setFormValues(book: Book): void {
     // Nach dem Initialisieren des Formulars werden die Felder zum Editiren mit Buchdaten gefüllt
@@ -64,7 +72,8 @@ export class BookFormComponent implements OnInit, OnChanges {
   // beinahe beliebig viele Datensätze hinzufügen. Daher werden hier Arrays als Eingangsdatenstruktur verwendet.
   private buildAuthorsArray(values: string[]): FormArray {
     // FormBuilder erzeugt ein FormArray mit jeweils einem FormControl für jeden Author-String aus dem values Array
-    return this.fb.array(values, Validators.required);
+    return this.fb.array(values,
+      BookValidators.atLeastOneAuthor);
   }
 
   private buildThumbnailsArray(values: Thumbnail[]): FormArray {

@@ -21,6 +21,8 @@ export class CreateBookComponent implements OnInit {
   }
 
   createBook(book: Book): void {
+    book.authors = book.authors.filter(Boolean); // Eingabefelder werden gefiltert, sind leere angelegt, werden die vor dem Speichern entfernt
+
     this.bs.create(book).subscribe(() => {
       this.router.navigate(['../..', 'books'], {relativeTo: this.route}); // User weiterleiten
     });

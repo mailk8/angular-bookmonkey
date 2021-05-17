@@ -28,6 +28,8 @@ export class EditBookComponent implements OnInit {
   }
 
   updateBook(book: Book): void {
+    book.authors = book.authors.filter(Boolean); // Eingabefelder werden gefiltert, sind leere angelegt, werden die vor dem Speichern entfernt
+
     this.bs.update(book).subscribe(() => {
       this.router.navigate(
         ['../../..', 'books', book.isbn],
