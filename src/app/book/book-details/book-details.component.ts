@@ -1,7 +1,7 @@
 // Detailansicht Buch
 import {Component, Input, OnInit} from '@angular/core';
-import { Book } from '../shared/book';
-import {BookStoreService} from '../shared/book-store.service';
+import { Book } from '../../shared/book';
+import {BookStoreService} from '../../shared/book-store.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({

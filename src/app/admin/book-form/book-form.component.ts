@@ -1,10 +1,10 @@
 // Formularcontroller Bücher editieren und erstellen
 // Umgestellt von TemplateDrivenForms auf ReactiveForms
 import {Component, OnInit, Output, EventEmitter, ViewChild, Input, OnChanges} from '@angular/core';
-import {Book} from '../shared/book';
+import {Book} from '../../shared/book';
 import {FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
-import {Thumbnail} from '../shared/thumbnail';
-import {BookFactory} from '../shared/book-factory';
+import {Thumbnail} from '../../shared/thumbnail';
+import {BookFactory} from '../../shared/book-factory';
 import {BookExistsValidatorService} from '../shared/book-exists-validator.service';
 import {BookValidators} from '../shared/book-validators';
 
