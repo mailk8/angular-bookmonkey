@@ -20,6 +20,8 @@ import { FormMessagesComponent } from './form-messages/form-messages.component';
 import {registerLocaleData} from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import { IsbnPipe } from './shared/isbn.pipe';
+import { ZoomDirective } from './shared/zoom.directive';
+import { DelayDirective } from './shared/delay.directive';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { IsbnPipe } from './shared/isbn.pipe';
     CreateBookComponent,
     EditBookComponent,
     FormMessagesComponent,
-    IsbnPipe
+    IsbnPipe,
+    ZoomDirective,
+    DelayDirective
   ],
   imports: [
     BrowserModule,
