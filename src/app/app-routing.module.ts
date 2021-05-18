@@ -1,19 +1,18 @@
 // Sorgt für Komponentenwechsel
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
-import {BookDetailsComponent} from './book/book-details/book-details.component';
-import {BookListComponent} from './book/book-list/book-list.component';
-import {CreateBookComponent} from './admin/create-book/create-book.component';
-import {EditBookComponent} from './admin/edit-book/edit-book.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent}
+  {path: 'home', component: HomeComponent},
+  {path: 'books', loadChildren: () => import('./book/books.module').then(m => m.BooksModule)},  // LAZY LOADING; Präfix books darf nicht in Book Modul Route erneut definiert werden
+  {path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)}  // LAZY LOADING ...
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],  // PRELOADING aller Module, nachdem der User das Main Modul erhalten hat
+  // imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

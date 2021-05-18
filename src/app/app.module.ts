@@ -22,9 +22,9 @@ import {BooksModule} from './book/books.module';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
-    BooksModule,
-    AdminModule
+    AppRoutingModule
+    // BooksModule, // für LAZY LOADING entfernt
+    // AdminModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},

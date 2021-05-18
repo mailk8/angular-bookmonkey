@@ -1,5 +1,8 @@
 <!-- Modulares Book List Item -->
-<img class="ui tiny image" *ngIf="book.thumbnails && book.thumbnails[0] && book.thumbnails[0].url" [src]="book.thumbnails[0].url" bmZoom>
+<img class="ui tiny image" *ngIf="book.thumbnails && book.thumbnails[0] && book.thumbnails[0].url" [src]="book.thumbnails[0].url"
+     bmZoom
+     width="80px" height="116px">
+    <!--bmZoom verknüpft Zoom Direktive bei Mouseover, Vordefinierte Größe der Images verhindert zappeligen Seitenaufbau -->
 <div class="content">
   <div class="header">{{book.title}}</div>
   <div *ngIf="book.subtitle" class="description">{{book.subtitle}}</div>
