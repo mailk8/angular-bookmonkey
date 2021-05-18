@@ -10,8 +10,7 @@ import { SearchComponent } from './search/search.component';
 import {TokenInterceptor} from './shared/token.interceptor';
 import {registerLocaleData} from '@angular/common';
 import localeDe from '@angular/common/locales/de';
-import {AdminModule} from './admin/admin.module';
-import {BooksModule} from './book/books.module';
+
 
 @NgModule({
   declarations: [
