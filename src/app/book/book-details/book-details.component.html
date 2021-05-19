@@ -7,38 +7,44 @@
   <div class="ui divider"></div>    <!-- HR   -->
   <div class="ui grid">
     <div class="four wide column">
-        <h4>Autoren</h4>
+        <h4 i18n="@@BookDetailsComponent:book authors">Autoren</h4>
         <ng-container *ngFor="let author of book.authors">
           {{author}}<br>
         </ng-container>
     </div>
     <div class="four wide column">
-      <h4>ISBN</h4>
+      <h4 i18n="@@BookDetailsComponent:book isbn">ISBN</h4>
       {{book.isbn | isbn}}
     </div>
     <div class="four wide column">
-      <h4>Erschienen</h4>
+      <h4 i18n="@@BookDetailsComponent:book published date">Erschienen</h4>
       {{book.published | date:'longDate'}}
     </div>
     <div class="four wide column">
-      <h4>Rating</h4>
+      <h4 i18n="@@BookDetailsComponent:book rating">Rating</h4>
       <ng-container *ngFor="let r of getRating(book.rating); index as i">
         <i class="yellow star icon" *bmDelay="200 + i * 200"></i>
       </ng-container>
     </div>
   </div>
-  <h4>Beschreibung</h4>
+  <h4 i18n="@@BookDetailsComponent:book description">Beschreibung</h4>
   <p>{{book.description}}</p>
   <div class="ui small images">
 <!--    Defaultbild einfügen ?-->
     <img *ngFor="let thumbnail of book.thumbnails" [src]="thumbnail.url">
   </div>
-<!--  <button class="ui red button" (click)="showBookList()">Zurück zur Buchliste</button>-->
-
-<button class="ui tiny red labeled icon button" (click)="removeBook()" style="margin-right: 4em; !important;"><i class="remove icon"></i>Buch löschen</button>
-<button class="ui tiny yellow labeled icon button" [routerLink]="['../../admin/edit/', book.isbn]"><i class="edit icon"></i>Buch bearbeiten</button>
+  <!--  <button class="ui red button" (click)="showBookList()">Zurück zur Buchliste</button>-->
+  <button class="ui tiny red labeled icon button" (click)="removeBook()" style="margin-right: 4em; !important;"><i class="remove icon"></i>
+    <ng-container i18n="@@BookDetailsComponent:book delete">
+      Buch löschen
+    </ng-container>
+</button>
+  <button class="ui tiny yellow labeled icon button" [routerLink]="['../../admin/edit/', book.isbn]"><i class="edit icon"></i>
+    <ng-container i18n="@@BookDetailsComponent:book edit">
+        Buch bearbeiten
+    </ng-container>
+</button>
 </div>
-
 
 <!--Muss außerhalb des referenzierenden Divs stehen-->
 <ng-template #loading>

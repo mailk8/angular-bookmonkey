@@ -1,5 +1,5 @@
 <!--Bücher editieren-->
-<h1>Buch bearbeiten</h1>
+<h1 i18n="@@BookFormComponent:book form">Buch bearbeiten</h1>
 <!-- ngIf: Das Template zeigt erst etwas an, wenn sich die Komponente das zu bearbeitende Buch in den Member book gelegt hat-->
 <!--Angezeigt wird die Book Form. In dessen Komponente gibt es die Member book und editing, die hier gesetzt werden-->
 <bm-book-form *ngIf="book" (submitBook)="updateBook($event)"

@@ -1,6 +1,9 @@
 <!--Startseite-->
-<h1>Home</h1>
-<p>Das ist der BookMonkey.</p>
-<a routerLink="../books" class="ui red button">Buchliste ansehen<i class="right arrow icon"></i></a>
-<h2>Büchersuche</h2>
+<h1 i18n="@@HomeComponent:header">Home</h1>
+<p i18n="description@@HomeComponent:tagline">Das ist der BookMonkey.</p>
+<a routerLink="../books" class="ui red button">
+  <ng-container i18n="Text of the link to the books screen@@HomeComponent:book list link">Buchliste ansehen</ng-container>
+  <i class="right arrow icon"></i>
+</a>
+<h2 i18n="@@HomeComponent:search">Büchersuche</h2>
 <bm-search></bm-search>

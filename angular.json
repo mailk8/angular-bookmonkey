@@ -55,6 +55,9 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "en": {
+              "localize": ["en"]
             }
           }
         },
@@ -66,6 +69,9 @@
           "configurations": {
             "production": {
               "browserTarget": "angular-bookmonkey:build:production"
+            },
+            "en": {
+              "browserTarget": "angular-bookmonkey:build:en"
             }
           }
         },
@@ -115,6 +121,15 @@
             "production": {
               "devServerTarget": "angular-bookmonkey:serve:production"
             }
+          }
+        }
+      },
+      "i18n": {
+        "sourceLocale": "de",
+        "locales": {
+          "en": {
+            "translation": "src/messages.en.xtb",
+            "baseHref": ""
           }
         }
       }
