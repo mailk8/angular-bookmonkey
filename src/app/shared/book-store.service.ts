@@ -1,21 +1,22 @@
 // Erzeugt Bücher und fungiert als DAO
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, of, throwError} from 'rxjs';
 import {Book} from './book';
 import {BookRaw} from './book-raw';
 import {catchError, map, retry} from 'rxjs/operators';
 import {BookFactory} from './book-factory';
+import { API_URL } from '../../environments/tokens';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookStoreService {
   // Stellt Bücher als json über eine REST-Api bereit
-  private api = 'https://api4.angular-buch.com/secure';
+  // private api = 'https://api4.angular-buch.com/secure'; // wird aus Environments geladen
   // books: Book[];
 
-  constructor(private http: HttpClient) {
+  constructor(@Inject(API_URL) private api: string, private http: HttpClient) {
   }
   // Retourniert nur zum Schein ein Observable, damit die .pipe weiterhin einen validen Return hat
   private errorHandler(error: HttpErrorResponse): Observable<any> {
