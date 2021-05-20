@@ -8,10 +8,12 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic([
+document.addEventListener('DOMContentLoaded', () => {
+     platformBrowserDynamic([
   {
     provide: API_URL,
     useValue: environment.apiUrl
   }
 ]).bootstrapModule(AppModule)
   .catch(err => console.error(err));
+   });
