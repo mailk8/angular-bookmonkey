@@ -52,6 +52,7 @@ export class BookStoreService {
 
   // READ
   getAll(): Observable<Book[]> { // Request wird nur ausgeführt, wenn das Observable subscribed wird. Das erfolgt in den Komponenten
+    console.log('getAll() Books aufgerufen');
     //    return this.http.get<any[]>(`${this.api}/books`);
     const bookArr = this.http.get<BookRaw[]>(`${this.api}/books`)
     // erstes map transformiert das Observable, zweites map durchläuft das Array

@@ -8,6 +8,10 @@ import { HomeComponent } from './home/home.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { SearchComponent } from './search/search.component';
 import {TokenInterceptor} from './shared/token.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
 // import {registerLocaleData} from '@angular/common';
 // import localeDe from '@angular/common/locales/de';
 
@@ -21,7 +25,10 @@ import {TokenInterceptor} from './shared/token.interceptor';
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({}, {}), // akzeptiert Recuder und Einsatzzweck
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([])
     // BooksModule, // für LAZY LOADING entfernt
     // AdminModule
   ],

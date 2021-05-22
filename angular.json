@@ -57,7 +57,9 @@
               ]
             },
             "en": {
-              "localize": ["en"]
+              "localize": [
+                "en"
+              ]
             }
           }
         },
@@ -185,5 +187,8 @@
       }
     }
   },
-  "defaultProject": "angular-bookmonkey"
+  "defaultProject": "angular-bookmonkey",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

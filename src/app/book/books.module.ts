@@ -8,6 +8,10 @@ import {BookDetailsComponent} from './book-details/book-details.component';
 import {IsbnPipe} from './shared/isbn.pipe';
 import {ZoomDirective} from './shared/zoom.directive';
 import {DelayDirective} from './shared/delay.directive';
+import { StoreModule } from '@ngrx/store';
+import * as fromBook from './store/book.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { BookEffects } from './store/book.effects';
 
 
 @NgModule({
@@ -22,6 +26,8 @@ import {DelayDirective} from './shared/delay.directive';
   imports: [
     CommonModule,
     BooksRoutingModule,
+    StoreModule.forFeature(fromBook.bookFeatureKey, fromBook.reducer), // Feature Key = book
+    EffectsModule.forFeature([BookEffects]),
   ]
 })
 export class BooksModule { }
